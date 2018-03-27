@@ -6,5 +6,7 @@
         "member-access": false,
         "object-literal-key-quotes": [false],
         "no-console": false,
+        "prefer-const": true,
+        "no-shadowed-variable": true
     }
 }
