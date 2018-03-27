@@ -1,0 +1,10 @@
+{
+    "defaultSeverity": "warn",
+    "extends": ["tslint:recommended"],
+    "jsRules": {},
+    "rules": {
+        "member-access": false,
+        "object-literal-key-quotes": [false],
+        "no-console": false,
+    }
+}
