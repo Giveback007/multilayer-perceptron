@@ -14,18 +14,4 @@ new p5((p: p5) => {
     p.draw = () => {
 
     }
-
 });
-
-const m1 = new Matrix(3, 2);
-const m2 = new Matrix(3, 2);
-m1.randomize();
-m2.randomize();
-console.log("m1");
-console.table(m1.vals);
-
-console.log("m2");
-console.table(m2.vals);
-
-m1.addMatrix(m2);
-console.table(m1.vals);
