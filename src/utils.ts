@@ -1,0 +1,1 @@
+export const array = (length: number): number[] => Array(length).fill(null)

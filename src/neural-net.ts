@@ -1,11 +1,18 @@
-export class NeuralNetwork {
-    inpNodes: number;
-    hidNodes: number;
-    outNodes: number;
+import { array } from "./utils";
 
-    constructor(inpNodes: number, hidNodes: number, outNodes: number) {
-        this.inpNodes = inpNodes;
-        this.hidNodes = hidNodes;
-        this.outNodes = outNodes;
+
+export function createNeuralNet(inputs: number, pattern: number[]) {
+
+    let inp = inputs;
+    let neuralNet: neuralNet = [];
+
+    for (let numOfNodes of pattern) {
+        const layer: layer = array(numOfNodes)
+            .map(() => array(inp + 1).map(() => Math.random() * 2 - 1));
+
+        neuralNet.push(layer);
+        inp = numOfNodes;
     }
+
+    return neuralNet;
 }

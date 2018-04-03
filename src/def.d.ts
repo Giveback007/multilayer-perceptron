@@ -10,6 +10,4 @@ type node = weight[];
 type layer = node[];
 type neuralNet = layer[];
 
-type reducedInputs = number;
-
-type activationFunction = (reducedInputs: reducedInputs) => output;
+type activationFunction = (reducedInputs: number) => output;
