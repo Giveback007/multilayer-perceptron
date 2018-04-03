@@ -23,12 +23,13 @@ export class Matrix {
             row.map((val, colIdx) => val + m.vals[rowIdx][colIdx]))
 
     // for every row
-    forEveryRow = (funct: callBack) => this.vals = this.vals.map((row) => row.map(funct));
+    apply = (funct: callBack) => this.vals = this.vals.map((row) => row.map(funct));
 
-    multiply = (n: number) => this.forEveryRow((val) => val * n);
-    add = (n: number) => this.forEveryRow((val) => val + n);
+    multiply = (n: number) => this.apply((val) => val * n);
 
-    randomize = () => this.forEveryRow(() => Math.floor(Math.random() * 10));
+    add = (n: number) => this.apply((val) => val + n);
+
+    randomize = () => this.apply(() => Math.floor(Math.random() * 10));
 
     transpose = () => {
         const arr: number[][] = Array(this.cols).fill(null).map(() => []);
@@ -37,13 +38,15 @@ export class Matrix {
 
         return this.vals = arr;
     }
+
+    print = () => console.table(this.vals);
 }
 
 export function dotProduct(mtrX: Matrix, mtrY: Matrix) {
-    if (mtrX.rows !== mtrY.cols || mtrX.cols !== mtrY.rows) {
+    if (mtrX.cols !== mtrY.rows) {
         throw "check number of rows and cols on each matrix";
     }
-    
+
     const matrix = new Matrix({rows: mtrX.rows, cols: mtrY.cols});
 
     const arr = matrix.vals.map((r, row) => r.map((c, col) =>
