@@ -1,6 +1,5 @@
 import { array } from "./utils";
 
-
 export function createNeuralNet(inputs: number, pattern: number[]) {
 
     let inp = inputs;

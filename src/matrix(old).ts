@@ -1,7 +1,7 @@
 type callBack = (val: number, idx?: number) => number;
 interface MatrixArgs { rows?: number, cols?: number, fromArray?: number[][] }
 
-export class Matrix {
+class Matrix_old {
     rows: number;
     cols: number;
     vals: number[][];
@@ -18,7 +18,7 @@ export class Matrix {
     }
 
     // immutable
-    addMatrix = (m: Matrix) =>
+    addMatrix = (m: Matrix_old) =>
         this.vals = this.vals.map((row, rowIdx) =>
             row.map((val, colIdx) => val + m.vals[rowIdx][colIdx]))
 
@@ -42,16 +42,16 @@ export class Matrix {
     print = () => console.table(this.vals);
 }
 
-export function dotProduct(mtrX: Matrix, mtrY: Matrix) {
+export function dotProduct(mtrX: Matrix_old, mtrY: Matrix_old) {
     if (mtrX.cols !== mtrY.rows) {
         throw "check number of rows and cols on each matrix";
     }
 
-    const matrix = new Matrix({rows: mtrX.rows, cols: mtrY.cols});
+    const matrix = new Matrix_old({rows: mtrX.rows, cols: mtrY.cols});
 
     const arr = matrix.vals.map((r, row) => r.map((c, col) =>
         mtrX.vals[row].reduce((sum, x, xIdx) => x * mtrY.vals[xIdx][col] + sum, 0))
     );
 
-    return new Matrix({fromArray: arr});
+    return new Matrix_old({fromArray: arr});
 }
