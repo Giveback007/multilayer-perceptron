@@ -15,4 +15,5 @@ type neuralNet = layer[];
 type target = number;
 type error = number;
 
-type activationFunction = (reducedInputs: number) => output;
+
+type activationFunction = (sum: number) => output;
