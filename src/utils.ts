@@ -31,3 +31,63 @@ export const nodeErrToLayerErr = (nodeErrors: error[][]) => {
 
     return sums;
 }
+
+export type loggerArgs = {
+    inputs?: number[];
+    neuralNet?: number[][][];
+    output?: number[][];
+    target?: number[];
+    hiddenErrors?: error[][];
+    outputErrors?: error[];
+};
+export function logger({
+    inputs, neuralNet, hiddenErrors,
+    output, target, outputErrors
+}: loggerArgs) {
+    const line = () => console.log('--  --  --  --  --  --  --');
+    const title = (name: string | number) => {
+        line();
+        console.log(`// ${name} //`);
+    }
+    
+    if (neuralNet) {
+        title('NEURAL NETWORK');
+        neuralNet.forEach((layer, i) => {
+            console.log('* LAYER-' + i);
+            layer.forEach((node, j) => console.log(`L${i}N${j}`, node));
+        });
+    }
+    
+    if (output) {
+        title('OUTPUTS');
+
+        output.forEach((layer, i) => {
+            console.log('* LAYER-' + i);
+            layer.forEach((node, j) => console.log(`L${i}N${j}`, node));
+        });
+    }
+
+    if (hiddenErrors) {
+        title('HIDDEN ERRORS');
+        hiddenErrors.forEach((layer, i) => {
+            console.log('* LAYER-' + i);
+            layer.forEach((node, j) => console.log(`L${i}N${j}`, node));
+        });
+    }
+
+    if (inputs) {
+        title('INPUTS');
+        console.log(inputs);
+    }
+
+    if (output) {
+        title('FINAL-OUTPUT');
+        console.log(output[output.length - 1]);
+    }
+
+    if (outputErrors) {
+        title('OUTPUT-ERRORS');
+        console.log(outputErrors);
+    }
+    
+}

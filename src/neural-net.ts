@@ -7,7 +7,7 @@ export function createNeuralNet(inputs: number, pattern: number[]) {
 
     for (let numOfNodes of pattern) {
         const layer: layer = array(numOfNodes)
-            .map(() => array(inp + 1).map(() => Math.random() * 2 - 1));
+            .map(() => array(inp + 1).map(() => /* Math.random() */ 0.75 * 2 - 1));
 
         neuralNet.push(layer);
         inp = numOfNodes;

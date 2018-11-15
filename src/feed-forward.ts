@@ -10,7 +10,7 @@ const activationFunction: ActivationFunction = LReLU;
 // 4. Put the sum trough an activation function f(sum) => output
 const feedNode = (node: node, inputs: input[]): output =>
     activationFunction(
-        // `inputs.reduce` because `node.length = (input.length + 1)` due to bias
+        // `inputs.reduce` because `node.length === (input.length + 1)` due to bias
         inputs.reduce((sum: number, input: input, i) =>
             (input * (node[i] as weight)) + sum, node[node.length - 1] as bias)
     )
@@ -24,9 +24,9 @@ const feedLayer =
 
 // 1. Take an array of inputs (input[])
 // 2. For each layer take the previous output as an input (layerInput[idx] = layer[idx - 1] 'output')
-// 3. Final layer output is the neural nets output
-export function feedNeuralNet (neuralNet: neuralNet, inputs: input[]): output[] {
-    const outputs = [];
+// 3. Return each layers output, output[output.length - 1] is the neural nets final output
+export function feedNeuralNet (neuralNet: neuralNet, inputs: input[]): output[][] {
+    const outputs: output[][] = [];
 
     for (let i = 0; i < neuralNet.length; i++) {
         const layer = neuralNet[i];

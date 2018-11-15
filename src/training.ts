@@ -7,10 +7,9 @@ const square = (output: output, target: target) => (output - target) ** 2 / 2;
 const errorFunction: ErrorFunction = square;
 
 // * teacher * - scores the output of the NN to the target
-export const findOutputErrors =
-    (outputs: output[], targets: target[]): error[] => 
-        targets.map((t, i) => errorFunction(outputs[i], t));
-
+export function findOutputErrors(outputs: output[], targets: target[]): error[] {
+    return targets.map((t, i) => errorFunction(outputs[i], t));
+}
 
 /* For Personal Learning */
 // Look up the mathematical notation and all the terms being used
