@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -10,9 +12,7 @@ module.exports = {
         hot: true,
         port: 9000
     },
-    entry: {
-        app:"./src/app.ts",
-    },
+    entry: { app:"./src/app.ts", },
     output: {
         path: __dirname + "/dist",
         filename: "[name].bundle.js"
@@ -81,9 +81,11 @@ module.exports = {
         ]
     },
     plugins: [
+        new ForkTsCheckerWebpackPlugin(),
+        new ForkTsCheckerNotifierWebpackPlugin({ excludeWarnings: true }),
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: 'My App',
+            title: 'NN-Net',
             template: './src/index.html',
             filename: 'index.html',
             favicon: 'src/favicon.png'
