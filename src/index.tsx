@@ -1,4 +1,7 @@
 // import "./index.scss";
+import React = require("react");
+import ReactDOM = require("react-dom");
+
 import { createNeuralNet } from "./neural-net";
 import { feedNeuralNet } from "./feed-forward";
 import { neuralNetErrors } from "./hidden-errors";
@@ -24,3 +27,11 @@ logger({
     outputErrors,
     hiddenErrors
 });
+
+ReactDOM.render(
+    // <Provider store={store}>
+    //     <App />
+    // </Provider>
+    <div>IT WORKS</div>,
+    document.getElementById('app-root')
+);

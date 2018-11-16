@@ -9,7 +9,23 @@
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:9000",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "trace": true,
+            "smartStep": true,
+            "preLaunchTask": "npm: webpack-serve",
+            "skipFiles": [
+                "webpack:///webpack/bootstrap",
+                "webpack\\bootstrap",
+                "${workspaceRoot}/node_modules/**/*.js",
+                "<node_internals>/**/*.js",
+                "${workspaceRoot}/node_modules/",
+                "socket.js",
+                "client",
+                "log$",
+                "log.js",
+                "sockjs.js"
+            ]
         }
     ]
 }

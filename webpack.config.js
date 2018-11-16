@@ -6,13 +6,13 @@ const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-web
 
 module.exports = {
     mode: "development",
-    devtool: "inline-source-map",
+    devtool: "source-map",
     devServer: {
         contentBase: __dirname + '/dist/index.html',
         hot: true,
         port: 9000
     },
-    entry: { app:"./src/app.ts", },
+    entry: { app:"./src/index.tsx", },
     output: {
         path: __dirname + "/dist",
         filename: "[name].bundle.js"
@@ -23,8 +23,9 @@ module.exports = {
     },
     module: {
         rules: [
-            { 
-                test: /\.ts?$/, 
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
                 use: [{
                     loader: 'ts-loader',
                     options: { transpileOnly: true }
@@ -40,61 +41,40 @@ module.exports = {
                     loader: "sass-loader", // compiles Sass to CSS
                     options: { sourceMaps: true }
                 }]
-            }
-        ],
-        rules: [
-            { 
-                test: /\.tsx?$/, 
-                use: [
-                /* npm install babel-loader react-hot-loader -D */
-                // {
-                //     loader: 'babel-loader',
-                //     options: { plugins: ['react-hot-loader/babel'] }
-                // },
-                {
-                    loader: 'ts-loader',
-                    options: { transpileOnly: true }
-                }], 
-                
-            }, {
-                test: /\.scss$/,
+            }, {  // png files don't load, need fix
+                test: /\.(jpg|png||woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: [{
-                    loader: "style-loader" // creates style nodes from JS strings
-                }, {
-                    loader: "css-loader", // translates CSS into CommonJS
-                    options: { sourceMaps: true }
-                }, {
-                    loader: "sass-loader", // compiles Sass to CSS
-                    options: { sourceMaps: true }
+                    loader: 'url-loader',
+                    options: {
+                        limit: 100000
+                    }
                 }]
-            }, 
-            /* npm install url-loader -D */
+            },
+            // Alternatively use file-loader
             // {
-            //     test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            //     test: /\.(jpg|png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             //     use: [{
-            //         loader: 'url-loader',
+            //         loader: "file-loader",
             //         options: {
-            //             limit: 100000
+            //             name: "assets/[name].[ext]",
             //         }
             //     }]
             // }
         ]
     },
     plugins: [
-        new ForkTsCheckerWebpackPlugin(),
-        new ForkTsCheckerNotifierWebpackPlugin({ excludeWarnings: true }),
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: 'NN-Net',
+            title: 'Neural Network',
             template: './src/index.html',
             filename: 'index.html',
             favicon: 'src/favicon.png'
         }),
         // For HMR, makes it easier to see which dependencies are being patched
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new ForkTsCheckerWebpackPlugin(),
+        new ForkTsCheckerNotifierWebpackPlugin({ excludeWarnings: true }),
+        // new webpack.EnvironmentPlugin({ dev: true })
     ],
-    externals: {
-        //
-    }
+    externals: { }
 }
