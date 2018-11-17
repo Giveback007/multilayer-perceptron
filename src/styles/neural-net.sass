@@ -1,0 +1,62 @@
+*
+    font-family: 'Roboto Mono', monospace
+
+.app-wrap
+    margin-top: 40px
+    
+html, body
+    margin: 0
+    padding: 0
+
+.app-wrap
+    display: flex
+    
+.neural-net
+    display: flex
+
+h4
+    top: 15px
+    margin: 0
+    position: absolute
+    text-align: center
+    width: 150px
+
+.layer
+    margin-left: 15px
+
+.layer-inner
+    height: 100%
+
+.node-wrap
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+    height: 100%
+
+.node
+    width: 150px
+    margin: 10px 0
+    border: solid 1px black
+    background: #335c91
+    color: white
+    border-radius: 5px
+    overflow: hidden
+    
+.node-label
+    color: #ffa700
+    margin: 2px
+    margin-left: 8px
+
+.weight
+    display: flex
+    justify-content: space-between
+    padding: 0 5px
+    &:nth-child(2n)
+        background: #345074
+    // &:nth-child(2n+1)
+    //     background: blue
+    &:last-child
+        // background: red
+    &.bias
+        background: #4f6c91
+        

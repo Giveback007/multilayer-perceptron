@@ -1,16 +1,12 @@
 import { combineReducers, Middleware } from "redux";
-import { appReducer, AppState } from "./app.reducer";
-
-export const newStateCurrying = <S extends State[StateKey]>(state: S) => <T>(obj: T) => Object.assign({}, state, obj);
-
-export type StateKey = keyof State;
+import { neuralNetReducer, NeuralNetState } from "./neural-net.reducer";
 
 export type Effects = Middleware<{}, State>;
 
 export interface State {
-    app: AppState;
+    nn: NeuralNetState;
 }
 
 export const rootReducer = combineReducers<State>({
-    app: appReducer,
+    nn: neuralNetReducer,
 });

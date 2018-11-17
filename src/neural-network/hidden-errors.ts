@@ -17,6 +17,7 @@ const findLayerErrors = (layer: layer, errors: error[]): error[] => {
     return nodeErrToLayerErr(nodeErrors);
 };
 
+/** Finds all of the nn hidden errors */
 export const neuralNetErrors = (neuralNet: neuralNet, outputErrors: error[]): error[][] => {
     const errors: error[][] = [];
 
