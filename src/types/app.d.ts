@@ -5,7 +5,7 @@ type weight = number;
 type bias = number;
 
 /** [w1, w2, w3, b] */
-type node = (weight | bias)[];
+type node = Array<weight | bias>;
 type layer = node[];
 type neuralNet = layer[];
 

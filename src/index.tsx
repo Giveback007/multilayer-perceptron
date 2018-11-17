@@ -1,12 +1,15 @@
-// import "./index.scss";
 import React = require("react");
 import ReactDOM = require("react-dom");
+import { Provider } from "react-redux";
+import App from "./components/app.component";
+import { feedNeuralNet } from "./neural-network/feed-forward";
+import { neuralNetErrors } from "./neural-network/hidden-errors";
+import { createNeuralNet } from "./neural-network/neural-net";
+import { findOutputErrors } from "./neural-network/training";
+import { logger } from "./neural-network/utils";
+import { store } from "./store/store";
 
-import { createNeuralNet } from "./neural-net";
-import { feedNeuralNet } from "./feed-forward";
-import { neuralNetErrors } from "./hidden-errors";
-import { findOutputErrors } from "./training";
-import { logger } from "./utils";
+import "./index.scss";
 
 // In this exercise a 1 should always return a 1
 // & a 0 should always return a 0
@@ -20,18 +23,17 @@ const outputErrors = findOutputErrors(output[output.length - 1], target);
 const hiddenErrors = neuralNetErrors(neuralNet, outputErrors);
 
 logger({
-    inputs, 
-    neuralNet, 
+    hiddenErrors,
+    inputs,
+    neuralNet,
     output,
-    target,
     outputErrors,
-    hiddenErrors
+    target,
 });
 
 ReactDOM.render(
-    // <Provider store={store}>
-    //     <App />
-    // </Provider>
-    <div>IT WORKS</div>,
-    document.getElementById('app-root')
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById("app-root"),
 );

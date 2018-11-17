@@ -23,7 +23,7 @@ module.exports = {
     },
     module: {
         rules: [
-            {
+            { 
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: [{
@@ -41,7 +41,7 @@ module.exports = {
                     loader: "sass-loader", // compiles Sass to CSS
                     options: { sourceMaps: true }
                 }]
-            }, {  // png files don't load, need fix
+            }, { // png files don't load, need fix
                 test: /\.(jpg|png||woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: [{
                     loader: 'url-loader',
@@ -72,9 +72,23 @@ module.exports = {
         }),
         // For HMR, makes it easier to see which dependencies are being patched
         new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
         new ForkTsCheckerWebpackPlugin(),
         new ForkTsCheckerNotifierWebpackPlugin({ excludeWarnings: true }),
+
+        // TODO: Purge css // https://www.purgecss.com/#webpack
+        // new ExtractTextPlugin('[name].css?[hash]'),
+        // new PurgecssPlugin({ paths: glob.sync(`${PATHS.src}/*`)
         // new webpack.EnvironmentPlugin({ dev: true })
     ],
-    externals: { }
+    
+    // When importing a module whose path matches one of the following, just
+    // assume a corresponding global variable exists and use that instead.
+    // This is important because it allows us to avoid bundling all of our
+    // dependencies, which allows browsers to cache those libraries between builds.
+    externals: {
+        // "react": "React",
+        // "react-dom": "ReactDOM",
+        // "redux": "Redux"
+    }
 }

@@ -1,4 +1,4 @@
-import { array, nodeErrToLayerErr } from "./utils";
+import { nodeErrToLayerErr } from "./utils";
 
 // 1. Take the error for the given node
 // 2. Multiply each weight by the error
@@ -7,7 +7,7 @@ const findNodeErrors = (node: node, error: error): error[] => {
     const errors = node.map((w) => w * error);
     errors.pop(); // remove the bias
     return errors;
-}
+};
 
 // 1. Take the errors for the given layer
 // 2. Find each nodes errors with findNodeErrors(layer[i], errors[i])
@@ -15,11 +15,11 @@ const findNodeErrors = (node: node, error: error): error[] => {
 const findLayerErrors = (layer: layer, errors: error[]): error[] => {
     const nodeErrors = layer.map((node: node, i) => findNodeErrors(node, errors[i]));
     return nodeErrToLayerErr(nodeErrors);
-}
+};
 
 export const neuralNetErrors = (neuralNet: neuralNet, outputErrors: error[]): error[][] => {
-    let errors: error[][] = [];
-    
+    const errors: error[][] = [];
+
     for (let i = neuralNet.length - 1; i >= 0; i--) {
         const layer = neuralNet[i];
         const layerErrors = errors[i + 1] || outputErrors;
@@ -28,4 +28,4 @@ export const neuralNetErrors = (neuralNet: neuralNet, outputErrors: error[]): er
     }
 
     return errors;
-}
+};

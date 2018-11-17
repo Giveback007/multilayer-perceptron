@@ -1,2 +1,0 @@
-- gamma - "learning rate"
-- delta - "the output error for the node"
